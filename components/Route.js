@@ -5,6 +5,7 @@ import Home from "./screens/Home";
 import User from "./screens/User";
 import Profile from "./screens/Profile";
 import Menu from "./screens/Menu";
+import SideMenu from './screens/SideMenu';
 const HomeStack = StackNavigator(
   {
     HomeScreen: {
@@ -82,37 +83,40 @@ const TabBar = TabNavigator(
       navigationOptions:{
         tabBarLabel: 'Solution',
         tabBarIcon : ({focused})=>
-        ( focused === false ? (<Image source={require('../src/imgs/activesolution.png')} style={{height: 28, width: 28,}} />) : (<Image source={require('../src/imgs/inactivesolution.png')} style={{height: 28, width: 28,}} />) )
+        ( focused === true ? (<Image source={require('../src/imgs/inactivesolution.png')} style={{height: 28, width: 28,}} />) : (<Image source={require('../src/imgs/activesolution.png')} style={{height: 28, width: 28,}} />) )
       }
-    }
+    },
   },
   {
-
     initialRouteName: "HomeTab",
     tabBarPosition: "bottom",
     swipeEnabled: true,
     lazy:false,
     tabBarOptions: {
+      labelStyle:{ margin:0, padding:0, },
       upperCaseLabel: false,      
       activeTintColor: "yellow",
       inactiveTintColor: "black",
       style:{
         backgroundColor: '#5B99CA',
+        margin:0, padding:0,
       },
+      
       showIcon: true,
     },
   }
 );
 
 export default Drawer = DrawerNavigator({
-    Home : {
-        screen : TabBar,
-    },
-    Menu : {
-        screen: Menu,
-    }
+  HomeDrawer : {
+      screen : TabBar,
+  },
+  MenuDrawer : {
+      screen: Menu,
+  },
 },
-  {
-    
-  }
+{
+  initialRouteName: "HomeDrawer",
+  contentComponent: (props)=><SideMenu {...props}/>
+}
 )

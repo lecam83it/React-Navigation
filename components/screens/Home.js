@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Platform,
     Image,
+    ListView,
 
 } from "react-native";
 
@@ -15,19 +16,25 @@ export default class Home extends Component {
     }
     constructor(props){
         super(props);
+        this.state = {
+            dataSource : new ListView.DataSource({rowHasChanged:(o1, o2) =>o1 !== o2}).cloneWithRows(['row 1', 'row 2']),   
+        }
     }
   
     render(){
         return(
             <View style={styles.container}>
                 <Text>Home</Text>
-                <TouchableOpacity 
-                onPress={() => {
-                    this.props.navigation.navigate('ProfileScreen');
-                }}
-                >
-                    <Text>Click Me</Text>
-                </TouchableOpacity>
+                <ListView 
+                    dataSource={this.state.dataSource}
+                    renderRow={ (data)=>
+                        <View>
+                            <Text>
+                                {data}
+                            </Text>
+                        </View>
+                    }
+                />
             </View>
             
         );
@@ -39,10 +46,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    headerScreen: {
-        height : 50,
-        backgroundColor: 'green',
-        width: '100%',
-    },
-
 });
