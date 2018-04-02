@@ -6,6 +6,7 @@ import User from "./screens/User";
 import Profile from "./screens/Profile";
 import Menu from "./screens/Menu";
 import SideMenu from './screens/SideMenu';
+import Discuss from './screens/Discuss';
 const HomeStack = StackNavigator(
   {
     HomeScreen: {
@@ -67,7 +68,28 @@ const UserStack = StackNavigator(
     initialRouteName: "UserScreen",
   }
 );
-
+const DiscussStack = StackNavigator(
+  {
+    DiscussScreen: {
+      screen: Discuss,
+      navigationOptions: ({navigation}) => ({
+        headerStyle: {backgroundColor: '#5B99CA'},
+        headerTitleStyle : {color : 'white', fontWeight: '100'},
+        headerLeft:(
+          <TouchableOpacity onPress={()=>navigation.navigate('DrawerOpen')} >
+            <Image 
+              source={require('../src/imgs/menu.png')}
+              style={{height:20, width: 20, marginLeft: 10}}
+            />
+          </TouchableOpacity>
+        )
+      })
+    }
+  },
+  {
+    initialRouteName: "DiscussScreen",
+  }
+);
 const TabBar = TabNavigator(
   {
     HomeTab: {
@@ -84,6 +106,14 @@ const TabBar = TabNavigator(
         tabBarLabel: 'Solution',
         tabBarIcon : ({focused})=>
         ( focused === true ? (<Image source={require('../src/imgs/inactivesolution.png')} style={{height: 28, width: 28,}} />) : (<Image source={require('../src/imgs/activesolution.png')} style={{height: 28, width: 28,}} />) )
+      }
+    },
+    DiscussTab: {
+      screen: DiscussStack,
+      navigationOptions:{
+        tabBarLabel: 'Discuss',
+        tabBarIcon : ({focused})=>
+        ( focused === true ? (<Image source={require('../src/imgs/activediscuss.png')} style={{height: 28, width: 28,}} />) : (<Image source={require('../src/imgs/inactivediscuss.png')} style={{height: 28, width: 28,}} />) )
       }
     },
   },
@@ -108,15 +138,15 @@ const TabBar = TabNavigator(
 );
 
 export default Drawer = DrawerNavigator({
-  HomeDrawer : {
+  Home : {
       screen : TabBar,
   },
-  MenuDrawer : {
+  Menu : {
       screen: Menu,
   },
 },
 {
-  initialRouteName: "HomeDrawer",
+  initialRouteName: "Home",
   contentComponent: (props)=><SideMenu {...props}/>
 }
 )

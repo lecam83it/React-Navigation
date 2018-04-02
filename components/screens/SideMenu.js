@@ -1,44 +1,28 @@
 import React, { Component } from "react";
-import {
-    StyleSheet,
-    View,
-    Text,
-    Image,
-    ScrollView,
+import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
+import { DrawerItems, SafeAreaView } from "react-navigation";
 
-} from "react-native";
+const SideMenu = props => (
+  <View style={styles.container}>
+    <Image 
+        source={require('../../src/imgs/inactivediscuss.png')}
+        style={{alignSelf:'center', margin: 30}}
+    />
+    <ScrollView>
+      <DrawerItems {...props} />
+    </ScrollView>
+  </View>
+);
 
-export default class SideMenu extends Component {
-    
-    render(){
-        return(
-            <View style={styles.container}>
-                <View style={styles.introduce} >
-                    <Image/>
-                    <Text>My name is</Text>
-                </View>
-                <View style={styles.listItems}>
-                <ScrollView  >
-                    <Text>Page 1</Text>
-                    <Text>Page 2</Text>
-                    <Text>Page 3</Text>
-                    <Text>Page 4</Text>
-                </ScrollView>
-                </View>
-            </View>
-        );
-    }
-}
+export default SideMenu;
 const styles = StyleSheet.create({
-    container : {
-        flex: 1,
-        backgroundColor: 'gray',
-        alignItems: 'center',
-    },
-    introduce :{
-        flex : 1,   
-    },
-    listItems: {
-        flex : 6,
-    }
+  container: {
+    flex: 1,
+  },
+  introduce: {
+    flex: 1
+  },
+  listItems: {
+    flex: 6
+  }
 });

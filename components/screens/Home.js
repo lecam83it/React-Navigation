@@ -17,7 +17,7 @@ export default class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
-            dataSource : new ListView.DataSource({rowHasChanged:(o1, o2) =>o1 !== o2}).cloneWithRows(['row 1', 'row 2']),   
+            dataSource : new ListView.DataSource({rowHasChanged:(o1, o2) =>o1 !== o2}).cloneWithRows(['Contest 1', 'Contest 2']),   
         }
     }
   
@@ -28,11 +28,13 @@ export default class Home extends Component {
                 <ListView 
                     dataSource={this.state.dataSource}
                     renderRow={ (data)=>
-                        <View>
+                        <TouchableOpacity style={styles.row} 
+                            onPress={()=>{this.props.navigation.navigate('ProfileScreen')}}
+                        >
                             <Text>
                                 {data}
                             </Text>
-                        </View>
+                        </TouchableOpacity>
                     }
                 />
             </View>
@@ -43,7 +45,13 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    row: {
+        borderColor: 'black',
+        borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
+        padding: 4,
+        margin: 2,
+    }
 });
